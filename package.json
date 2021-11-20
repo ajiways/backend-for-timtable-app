@@ -1,0 +1,27 @@
+{
+  "name": "backend-for-timtable-app",
+  "version": "1.0.0",
+  "description": "Backend side for timetable app",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ajiways/backend-for-timtable-app.git"
+  },
+  "author": "kswbtw",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ajiways/backend-for-timtable-app/issues"
+  },
+  "homepage": "https://github.com/ajiways/backend-for-timtable-app#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
