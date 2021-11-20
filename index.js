@@ -1,21 +1,38 @@
-import express, { json } from "express";
-import path, { join } from 'path';
+import express from "express";
+import path from 'path';
 import mongoose from "mongoose";
 import flash from "flash/index.js";
 import session from "express-session";
+import MongoStore from "connect-mongo";
+import {default as userMiddleware} from "./middleware/user.js";
 import { fileURLToPath } from 'url';
-import { MONGO_URI } from "./config.js";
+import { MONGO_URI, SECRET_KEY, DB_OPTIONS } from "./config.js";
 import { default as apiRoutes } from "./routes/api.js";
 import { default as authRoutes } from "./routes/auth.js";
-const __filename = fileURLToPath(import.meta.url);
+const __filename = fileURLToPath(import.meta.url); 
 const __dirname = path.dirname(__filename);
+import { authMiddleware } from "./middleware/variables.js";
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 3000
+const store = new MongoStore({
+    mongoUrl: MONGO_URI,
+    ttl: 24 * 3600
+})
 const app = express()
 
+
 app.use(express.json())
+app.use(session({
+    secret: SECRET_KEY,
+    resave: false,
+    saveUninitialized: false,
+    store: store
+}))
 app.use(flash())
 
+
+app.use(userMiddleware)
+app.use(authMiddleware)
 app.use('/auth', authRoutes)
 app.use('/api', apiRoutes)
 
@@ -24,7 +41,7 @@ app.use('/api', apiRoutes)
 const start = () => {
     try {
         app.listen(PORT, async ()=> {
-            await mongoose.connect(MONGO_URI)
+            await mongoose.connect(MONGO_URI, DB_OPTIONS)
             console.log(`Server has been started on ${PORT}`);
         })
     } catch (e) {
