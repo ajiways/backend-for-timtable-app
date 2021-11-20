@@ -20,6 +20,8 @@
   "homepage": "https://github.com/ajiways/backend-for-timtable-app#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "flash": "^1.1.0",
     "mongoose": "^6.0.13"
   },
   "devDependencies": {
