@@ -1,5 +1,4 @@
 import pkg from 'mongoose';
-import {default as Group} from "./group.js"
 const { Schema, model } = pkg;
 
 const user = new Schema({ 
@@ -14,7 +13,17 @@ const user = new Schema({
     name: {
         type: String,
         required: true
-    }
+    },
+    group: {
+        type: String,
+        ref: 'Group'
+    },
+    roles: [
+        {
+            type: String,
+            ref: 'Role'
+        }
+    ]
 })
 
 

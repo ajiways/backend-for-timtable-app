@@ -6,6 +6,10 @@ const lesson = new Schema({
         type: String,
         required: true
     },
+    type: {
+        type: String,
+        required: true
+    },
     teacherName: {
         type: String,
         required: true

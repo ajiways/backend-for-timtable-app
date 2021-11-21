@@ -6,14 +6,18 @@ const group = new Schema({
         type: String,
         required: true
     },
-    timetable: {
-        type: Array,
-        required: false
-    },
-    users: {
-        type: Array,
-        required: false
-    }
+    timetable: [
+        {
+            type: String,
+            ref: 'Day'
+        }
+    ],
+    users: [
+        {
+            type: String,
+            ref: 'User'
+        }
+    ]
 })
 
 export default model('Group', group)

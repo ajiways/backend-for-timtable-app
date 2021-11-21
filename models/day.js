@@ -6,16 +6,9 @@ const day = new Schema({
         type: String,
         required: true
     },
-    lessons: {
-        type: Array,
-        required: true
-    },
-    week: {
-        type: Number,
-        required: true
-    },
-    dayNumber: {
-        type: Number,
+    lessons: [],
+    weekState: {
+        type: Boolean,
         required: true
     }
 })

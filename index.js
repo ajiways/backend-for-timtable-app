@@ -4,11 +4,13 @@ import mongoose from "mongoose";
 import flash from "flash/index.js";
 import session from "express-session";
 import MongoStore from "connect-mongo";
-import {default as userMiddleware} from "./middleware/user.js";
+import userMiddleware from "./middleware/user.js";
 import { fileURLToPath } from 'url';
 import { MONGO_URI, SECRET_KEY, DB_OPTIONS } from "./config.js";
-import { default as apiRoutes } from "./routes/api.js";
-import { default as authRoutes } from "./routes/auth.js";
+import apiRoutes from "./routes/api.js";
+import authRoutes from "./routes/auth.js"
+import userRoutes from "./routes/user.js"
+import adminRoutes from "./routes/admin.js"
 const __filename = fileURLToPath(import.meta.url); 
 const __dirname = path.dirname(__filename);
 import { authMiddleware } from "./middleware/variables.js";
@@ -35,6 +37,8 @@ app.use(userMiddleware)
 app.use(authMiddleware)
 app.use('/auth', authRoutes)
 app.use('/api', apiRoutes)
+app.use('/user', userRoutes)
+app.use('/admin', adminRoutes)
 
 
 

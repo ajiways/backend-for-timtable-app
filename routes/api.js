@@ -1,20 +1,15 @@
 import { Router } from "express";
+import Day from "../models/day.js";
+import Group from "../models/group.js"
+import Lesson from "../models/lesson.js";
 
 
 const router = Router()
 
-router.get('/test', (req, res) => {
-    if(!req.session.user) res.send('Net')
-    else res.send(req.session.user)
-})
-
-router.get('/admin/getprofile', async (req, res)=> {
-    if(!req.session.user) res.send('Нет авторизации')
-    else {
-        const { email, name, password, _id } = req.session.user
-        const data = {email, password, name, _id}
-        res.send(`Пользователь: ${JSON.stringify(data)}`)
-    }
+router.post('/test', async (req, res) => {
+    const test = await Day.findOne({name: "TestLesson"})
+    console.log(test.lessons);
+    res.send("done")
 })
 
 export default router
