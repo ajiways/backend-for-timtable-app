@@ -10,7 +10,11 @@ const day = new Schema({
         type: Array,
         required: true
     },
-    date: {
+    week: {
+        type: Number,
+        required: true
+    },
+    dayNumber: {
         type: Number,
         required: true
     }

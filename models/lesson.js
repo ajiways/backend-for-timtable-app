@@ -7,15 +7,15 @@ const lesson = new Schema({
         required: true
     },
     teacherName: {
-        type: "string",
+        type: String,
         required: true
     },
     startTime: {
-        type: Date,
+        type: String,
         required: true
     },
     endTime: {
-        type: Date,
+        type: String,
         required: true
     }
 })

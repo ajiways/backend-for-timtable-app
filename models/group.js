@@ -8,7 +8,11 @@ const group = new Schema({
     },
     timetable: {
         type: Array,
-        required: true
+        required: false
+    },
+    users: {
+        type: Array,
+        required: false
     }
 })
 

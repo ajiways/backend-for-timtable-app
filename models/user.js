@@ -1,4 +1,5 @@
 import pkg from 'mongoose';
+import {default as Group} from "./group.js"
 const { Schema, model } = pkg;
 
 const user = new Schema({ 
