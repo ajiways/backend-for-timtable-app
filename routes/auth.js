@@ -56,7 +56,7 @@ router.post('/registration', registerValidators, async(req, res)=> {
             email: email,
             password: await bcrypt.hash(password, 7),
             name: name,
-            group: userGroup,
+            group: userGroup._id,
             roles: [userRole.value]
         })
         await user.save()

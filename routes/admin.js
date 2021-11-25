@@ -19,10 +19,10 @@ router.post('/createday', async (req, res)=> {
     }
 })
 
-router.put('/editday/:grp/:day', async (req, res)=> {
+router.put('/editday', async (req, res)=> {
     try {
-        const group = await Group.findOne({name: req.params.grp})
-        const dayToEdit = group.timetable[req.params.day]
+        const group = await Group.findOne({name: req.query.grp})
+        const dayToEdit = group.timetable[req.query.day]
         let updated = ''
         if(req.body.dayname){
             await Day.updateOne({_id: dayToEdit._id}, 
@@ -68,26 +68,26 @@ router.post('/creategroup', async (req, res) => {
     }
 })
 
-router.put('/editgroup/:name', async (req, res) => {
+router.put('/editgroup', async (req, res) => {
     try {
         let updated = ''
         if(req.body.groupname) {
-            await Group.updateOne({name: req.params.name},{$set: {
+            await Group.updateOne({name: req.query.name},{$set: {
                 name: req.body.groupname
             }})
-            updated += ` Имя группы изменено на ${req.body.groupname} `
+            updated += ` Имя группы ${req.query.name} изменено на ${req.body.groupname} `
         }
         if(req.body.wipetimetable) {
-            await Group.updateOne({name: req.params.name},{$set: {
+            await Group.updateOne({name: req.query.name},{$set: {
                 timetable: []
             }})
             updated += ' Расписание очищено '
         }
         if(req.body.wipeusers) {
-            await Group.updateOne({name: req.params.name},{$set: {
+            await Group.updateOne({name: req.query.name},{$set: {
                 users: []
             }})
-            updated += ` Все пользователи из группы ${req.params.name} были удалены `
+            updated += ` Все пользователи из группы ${req.query.name} были удалены `
         }
         res.send(updated)
     } catch (e) {
