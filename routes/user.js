@@ -43,6 +43,7 @@ router.post('/edit', async (req, res)=> {
                     $set: {group: grp._id}
                 })
             }
+            res.send('Обновлено')
         }
     } catch (e) {
         console.log(e)

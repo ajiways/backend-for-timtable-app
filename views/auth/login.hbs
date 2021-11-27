@@ -1,0 +1,9 @@
+<h1>Логин пейдж :)</h1>
+{{#if loginStatus}}
+   <p class="alert">{{loginStatus}}</p>
+{{/if}}
+<form action="/auth/login" method="POST">
+   <input placeholder="Мыло" type="email" />
+   <input placeholder="Пароль" type="password" />
+   <button class="btn" method="SUBMIT">Войти</button>
+</form>
