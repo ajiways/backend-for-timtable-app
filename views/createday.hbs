@@ -1,0 +1,8 @@
+<h1>Создать день</h1>
+<p>{{adminStatus}}</p>
+<form action="/admin/createday/" method="POST">
+   <input placeholder="Для какой группы (имя)" type="text" name="groupname" id="groupname" />
+   <input placeholder="Для какой недели (чёт - 0/нечёт - 1)" type="text" name="weekstate" id="weekstate" />
+   <input placeholder="Название дня" type="text" name="dayname" id="dayname" />
+   <button class="btn btn-primary" method="submit">Создать день</button>
+</form>

@@ -1,0 +1,15 @@
+<h1>Редактировать день</h1>
+<p>{{adminStatus}}</p>
+<form action="/admin/editday/" method="POST">
+   <input placeholder="В какой группе (Название)" type="text" name="groupname"></input>
+   <input placeholder="Четность недели (0 - четная, 1 - нечетная)" type="text" name="weekstate"></input>
+   <input placeholder="В каком дне (0 - 6 где 0 - воскресенье, а 6 - суббота)" type="text" name="daynum"></input>
+   <input placeholder="Изменить название дня (например если не правильно написал)" type="text" name="dayname"></input>
+    <p>
+      <label>
+        <input type="checkbox" name="wipe" value="true"/>
+        <span>Удалить все пары из этого дня?</span>
+      </label>
+    </p>
+    <button class="btn btn-primary" type="submit">Редактировать день</button>
+</form>

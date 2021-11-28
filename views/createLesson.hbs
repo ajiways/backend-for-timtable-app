@@ -1,0 +1,18 @@
+<h1>Создать пару</h1>
+<p>{{adminStatus}}</p>
+<form action="/admin/createlesson" method="POST">
+   <input placeholder="Для какой группы" type="text" name="groupFor" />
+   <input
+      placeholder="Для какой недели? 0 - четная, 1 - нечетная"
+      type="text"
+      name="weektype"
+      id="weektype"
+   />
+   <input placeholder="Для какого дня (0-6 где 0 - воскресенье, а 6 - суббота)" type="text" name="dayFor" />
+   <input placeholder="Название пары" type="text" name="name" />
+   <input placeholder="Препод" type="text" name="teacherName" />
+   <input placeholder="Тип" type="text" name="type" />
+   <input placeholder="Начало" type="text" name="startTime" />
+   <input placeholder="Конец" type="text" name="endTime" />
+   <button class="btn btn-primary">Создать пару</button>
+</form>

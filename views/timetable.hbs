@@ -1,0 +1,9 @@
+<h1>Расписание</h1>
+
+{{#each timeTable}}
+   <p>Название пары: {{this.name}}</p>
+   <p>Тип пары: {{this.type}}</p>
+   <p>Препод: {{this.teacherName}}</p>
+   <p>Начало: {{this.startTime}}</p>
+   <p>Конец: {{this.endTime}}</p>
+{{/each}}

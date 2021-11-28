@@ -3,7 +3,7 @@
    <p class="alert">{{loginStatus}}</p>
 {{/if}}
 <form action="/auth/login" method="POST">
-   <input placeholder="Мыло" type="email" />
-   <input placeholder="Пароль" type="password" />
+   <input placeholder="Мыло" type="email" name="email" id="email" class="validate" />
+   <input placeholder="Пароль" type="password" name="password" id="password" class="validate" />
    <button class="btn" method="SUBMIT">Войти</button>
 </form>

@@ -1,10 +1,9 @@
 import { Router } from "express";
 import bcrypt from "bcryptjs";
-import { body, validationResult } from "express-validator";
+import { validationResult } from "express-validator";
 import { registerValidators, loginValidators } from "../utils/validators.js";
 import User from "../models/user.js";
 import Group from "../models/group.js";
-import Role from "../models/role.js";
 
 const router = Router();
 
@@ -25,20 +24,19 @@ router.post("/login", loginValidators, async (req, res) => {
             if (err) throw err;
          });
          req.flash("loginStatus", "Успешный логин");
-         res.send("Успешный логин");
+         res.redirect("../user/profile");
       } else {
          req.flash("loginStatus", "Неправильный пароль");
-         res.send("Неправильный пароль");
+         res.redirect("login");
       }
    } catch (e) {
       console.log(e);
    }
 });
 
-router.post("/logout", async (req, res) => {
+router.get("/logout", async (req, res) => {
    req.session.destroy(() => {
-      req.flash("loginStatus", "Успешный выход из системы");
-      res.send("Успешный выход");
+      res.redirect("login");
    });
 });
 
@@ -50,18 +48,16 @@ router.post("/registration", registerValidators, async (req, res) => {
          return res.status(422).send(`Ошибка регистрации: ${errors.array()[0].msg}`);
       }
       const { email, password, name } = req.body;
-      const userRole = await Role.findOne({ value: "USER" });
       const userGroup = await Group.findOne({ name: "DefaultGroup" });
       const user = new User({
          email: email,
          password: await bcrypt.hash(password, 7),
          name: name,
          group: userGroup._id,
-         roles: [userRole.value],
       });
       await user.save();
       req.flash("registerStatus", "Успешная регистрация!");
-      res.send("Успешная регистрация!");
+      res.redirect("login");
    } catch (e) {
       console.log(e);
    }
@@ -71,6 +67,13 @@ router.get("/login", (req, res) => {
    res.render("auth/login", {
       title: "Логин",
       loginStatus: req.flash("loginStatus"),
+   });
+});
+
+router.get("/registration", (req, res) => {
+   res.render("auth/register", {
+      title: "Регистрация",
+      registerStatus: req.flash("registerStatus"),
    });
 });
 export default router;

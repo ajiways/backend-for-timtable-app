@@ -1,0 +1,18 @@
+<h1>Регистрация : )</h1>
+{{#if registerStatus}}
+   <p class="alert">{{registerStatus}}</p>
+{{/if}}
+<form action="/auth/registration" method="POST">
+   <input placeholder="Мыло" type="email" name="email" id="email" class="validate" required />
+   <input placeholder="Пароль" type="password" name="password" id="password" class="validate" required />
+   <input
+      placeholder="Подтверждение пароля"
+      type="password"
+      name="confirm"
+      id="confirm"
+      class="validate"
+      required
+   ></input>
+   <input placeholder="Имя" type="text" name="name" id="name" class="validate" required />
+   <button class="btn" method="submit">Зарегаться</button>
+</form>

@@ -1,30 +1,27 @@
-import pkg from 'mongoose';
+import pkg from "mongoose";
 const { Schema, model } = pkg;
 
-const user = new Schema({ 
-    email: {
-        type: String,
-        required: true
-    },
-    password: {
-        type: String,
-        required: true
-    },
-    name: {
-        type: String,
-        required: true
-    },
-    group: {
-        type: String,
-        ref: 'Group'
-    },
-    roles: [
-        {
-            type: String,
-            ref: 'Role'
-        }
-    ]
-})
+const user = new Schema({
+   email: {
+      type: String,
+      required: true,
+   },
+   password: {
+      type: String,
+      required: true,
+   },
+   name: {
+      type: String,
+      required: true,
+   },
+   group: {
+      type: String,
+      ref: "Group",
+   },
+   role: {
+      type: String,
+      default: "USER",
+   },
+});
 
-
-export default model('User', user)
+export default model("User", user);
