@@ -11,7 +11,8 @@ router.post("/login", loginValidators, async (req, res) => {
    try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-         return res.status(422).json(errors);
+         let err = errors.array();
+         res.status(422).json({ status: "error", errors: err });
       }
       const { password, username } = req.body;
       const candidate = await User.findOne({ username });
@@ -22,11 +23,9 @@ router.post("/login", loginValidators, async (req, res) => {
          req.session.save((err) => {
             if (err) throw err;
          });
-         req.flash("loginStatus", "Успешный логин");
-         res.redirect("../user/profile");
+         res.json({ status: "done", message: "Успешный вход" });
       } else {
-         req.flash("loginStatus", "Неправильный пароль");
-         res.redirect("login");
+         res.json({ status: "error", message: "Не правильный пароль" });
       }
       res.json({ status: "done", message: "Успешный вход" });
    } catch (e) {
@@ -36,7 +35,7 @@ router.post("/login", loginValidators, async (req, res) => {
 
 router.get("/logout", async (req, res) => {
    req.session.destroy(() => {
-      res.redirect("login");
+      res.json({ status: "done", message: "Успешный выход из системы" });
    });
 });
 
@@ -44,36 +43,21 @@ router.post("/registration", registerValidators, async (req, res) => {
    try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-         req.flash("loginStatus", errors.array()[0].msg);
-         return res.status(422).send(`Ошибка регистрации: ${errors.array()[0].msg}`);
+         let err = errors.array();
+         res.status(422).json({ status: "error", errors: err });
       }
-      const { email, password, name } = req.body;
       const userGroup = await Group.findOne({ name: "DefaultGroup" });
       const user = new User({
-         email: email,
-         password: await bcrypt.hash(password, 7),
-         name: name,
+         username: req.body.username,
+         password: await bcrypt.hash(req.body.password, 7),
+         name: req.body.name,
          group: userGroup._id,
       });
       await user.save();
-      req.flash("registerStatus", "Успешная регистрация!");
-      res.redirect("login");
+      res.json({ status: "done", message: "Успешная регистрация" });
    } catch (e) {
       console.log(e);
    }
 });
 
-router.get("/login", (req, res) => {
-   res.render("auth/login", {
-      title: "Логин",
-      loginStatus: req.flash("loginStatus"),
-   });
-});
-
-router.get("/registration", (req, res) => {
-   res.render("auth/register", {
-      title: "Регистрация",
-      registerStatus: req.flash("registerStatus"),
-   });
-});
 export default router;

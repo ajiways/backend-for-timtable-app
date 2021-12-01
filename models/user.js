@@ -2,7 +2,7 @@ import pkg from "mongoose";
 const { Schema, model } = pkg;
 
 const user = new Schema({
-   email: {
+   username: {
       type: String,
       required: true,
    },

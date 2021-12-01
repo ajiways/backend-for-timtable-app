@@ -30,7 +30,7 @@ export let registerValidators = [
 export let loginValidators = [
    body("username").custom(async (value) => {
       try {
-         const candidate = await User.findOne({ name: value });
+         const candidate = await User.findOne({ username: value });
          if (!candidate) {
             return Promise.reject("Пользователь с таким username не зарегистрирован");
          }

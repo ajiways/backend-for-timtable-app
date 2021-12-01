@@ -122,7 +122,7 @@ router.post("/editlesson", async (req, res) => {
    } else if (req.body.weekstate == 1) {
       day = group.timetableOdd[req.body.daynumber];
    } else {
-      res.json({ message: "Ошибка" });
+      res.json({ status: "error", message: "Ошибка" });
    }
    const lessons = await Day.findOne({ _id: day._id }).timetable;
 });

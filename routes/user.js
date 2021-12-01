@@ -10,9 +10,9 @@ router.get("/profile", async (req, res) => {
    try {
       if (req.session.user) {
          const user = await User.findOne({ _id: req.session.user._id });
-         res.json(user);
+         res.json({ status: "done", user });
       } else {
-         res.json({ status: "unauthorized", message: "Вы не авторизованы" });
+         res.json({ status: "error", message: "Вы не авторизованы" });
       }
    } catch (e) {
       console.log(e);
@@ -22,7 +22,7 @@ router.get("/profile", async (req, res) => {
 router.post("/edit", async (req, res) => {
    try {
       if (!req.session.user) {
-         res.json({ status: "unauthorized", message: "Вы не авторизованы" });
+         res.json({ status: "error", message: "Вы не авторизованы" });
       } else {
          if (req.body.email) {
             await User.updateOne(
@@ -67,7 +67,7 @@ router.post("/edit", async (req, res) => {
 router.get("/timetable", async (req, res) => {
    try {
       if (!req.session.user) {
-         res.json({ status: "unauthorized", message: "Вы не авторизованы" });
+         res.json({ status: "error", message: "Вы не авторизованы" });
       } else {
          let d0 = new Date().getTime(),
             d = new Date(new Date().getFullYear(), 0, 1),
@@ -96,7 +96,7 @@ router.get("/timetable", async (req, res) => {
             lessons.push(tmp);
             counter++;
          }
-         res.json(lessons);
+         res.json({ status: "done", lessons });
       }
    } catch (e) {
       console.log(e);
