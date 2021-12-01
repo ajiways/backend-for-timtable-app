@@ -36,20 +36,23 @@ User get's info about his profile.<br>
 If user is unauthorized, he will get an error.<br>
 ```json
 {
- "status": "unauthorized",
+ "status": "error",
  "message": "Вы не авторизованы"
 }
 ```
 #### Response example
 ```json
 {
- "_id": "61a35f2726c45e943a3dc6d9",
- "email": "tester@mail.ru",
- "password": "$2a$07$SnIEsrxrbXpAPgGTD76syO.IFJOlqCXzfuXM5CpxpvNJhSap5PitO",
- "name": "Тестер",
- "group": "61a3b30ebe8403874c1c3f6c",
- "role": "ADMIN",
- "__v": 0
+    "status": "done",
+    "user": {
+        "_id": "61a77d3158e84ebc98224ae1",
+        "username": "Tester",
+        "password": "$2a$07$SrlJkQgeLiqEO2aDu3dOb..UcLWbVDoDpJxEo4YQVwkLcPHBrBRWa",
+        "name": "Tester",
+        "group": "61a3b30ebe8403874c1c3f6c",
+        "role": "USER",
+        "__v": 0
+    }
 }
 ```
 -----------------------------------------
@@ -69,7 +72,7 @@ Like name, email, etc... .<br>
 If user is unauthorized, he will get an error.<br>
 ```json
 {
- "status": "unauthorized",
+ "status": "error",
  "message": "Вы не авторизованы"
 }
 ```
@@ -102,24 +105,27 @@ will get it's for him. <br>
 If user is unauthorized, he will get an error.<br>
 ```json
 {
- "status": "unauthorized",
+ "status": "error",
  "message": "Вы не авторизованы"
 }
 ```
 
 #### Response example
 ```json
-[
- {
-  "_id": "61a758da79c2129a7e479cce",
-  "name": "Test",
-  "type": "Test",
-  "teacherName": "Test",
-  "startTime": "00-00",
-  "endTime": "00-00",
-  "__v": 0
- }
-]
+{
+    "status": "done",
+    "lessons": [
+        {
+            "_id": "61a758da79c2129a7e479cce",
+            "name": "Test",
+            "type": "Test",
+            "teacherName": "Test",
+            "startTime": "00-00",
+            "endTime": "00-00",
+            "__v": 0
+        }
+    ]
+}
 ```
 -----------------------------------------
 
@@ -149,6 +155,7 @@ username, password
 #### If errors
 ```json
 {
+ "status": "error",
  "errors": 
  [
   {
@@ -207,20 +214,25 @@ username, password, name
  "message": "Успешная регистрация"
 }
 ```
-#### If errors 
+#### If errors
 ```json
-[
- {
-  "msg": "Пользователь с таким username уже зарегистрирован",
-  "param": "username",
-  "location": "body"
-  },
+{
+ "status": "error",
+ "errors": 
+ [
   {
-  "msg": "Пароль должен быть от 6 до 56 символов",
-  "param": "password",
-  "location": "body"
- }
-[
+   "msg": "Пользователь с таким username уже зарегистрирован",
+   "param": "username",
+   "location": "body"
+   },
+   {
+   "msg": "Пароль должен быть от 6 до 56 символов",
+   "param": "password",
+   "location": "body"
+  }
+ ]
+}
+```
 ```
 -----------------------------------------
 
@@ -233,40 +245,40 @@ Whoever can get list of all groups.<br>
 
 ### Action
 ```
-/api/getgroups
+/api/groups
 ```
-
-#### Required inputs
-groupname, weekstate, daynumber
 
 #### Response example
 ```json
-[
- {
-  "_id": "61a3b30ebe8403874c1c3f6c",
-   "name": "DefaultGroup",
-   "timetableEven": [
-    "61a3b42a17f2fc77a78a29f4",
-    "61a3b43b17f2fc77a78a29f9",
-    "61a3b44017f2fc77a78a29fe",
-    "61a3b44617f2fc77a78a2a03",
-    "61a3b44c17f2fc77a78a2a08",
-    "61a3b45117f2fc77a78a2a0d",
-    "61a3b45a17f2fc77a78a2a12"
-   ],
-   "timetableOdd": [
-    "61a3b46f17f2fc77a78a2a17",
-    "61a3b47517f2fc77a78a2a1c",
-    "61a3b49f17f2fc77a78a2a25",
-    "61a3b4a217f2fc77a78a2a2a",
-    "61a3b4a817f2fc77a78a2a2f",
-    "61a3b4ac17f2fc77a78a2a34",
-    "61a3b4b117f2fc77a78a2a39"
-   ],
-  "users": [],
-  "__v": 0
- }
-]
+{
+    "status": "done",
+    "groups": [
+        {
+            "_id": "61a3b30ebe8403874c1c3f6c",
+            "name": "DefaultGroup",
+            "timetableEven": [
+                "61a3b42a17f2fc77a78a29f4",
+                "61a3b43b17f2fc77a78a29f9",
+                "61a3b44017f2fc77a78a29fe",
+                "61a3b44617f2fc77a78a2a03",
+                "61a3b44c17f2fc77a78a2a08",
+                "61a3b45117f2fc77a78a2a0d",
+                "61a3b45a17f2fc77a78a2a12"
+            ],
+            "timetableOdd": [
+                "61a3b46f17f2fc77a78a2a17",
+                "61a3b47517f2fc77a78a2a1c",
+                "61a3b49f17f2fc77a78a2a25",
+                "61a3b4a217f2fc77a78a2a2a",
+                "61a3b4a817f2fc77a78a2a2f",
+                "61a3b4ac17f2fc77a78a2a34",
+                "61a3b4b117f2fc77a78a2a39"
+            ],
+            "users": [],
+            "__v": 0
+        }
+    ]
+}
 ```
 -----------------------------------------
 
