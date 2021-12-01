@@ -11,11 +11,10 @@ router.post("/login", loginValidators, async (req, res) => {
    try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-         req.flash("loginStatus", errors.array()[0].msg);
-         return res.status(422).send(`Ошибка логина: ${errors.array()[0].msg}`);
+         return res.status(422).json(errors);
       }
-      const { password, email } = req.body;
-      const candidate = await User.findOne({ email });
+      const { password, username } = req.body;
+      const candidate = await User.findOne({ username });
       const areSame = await bcrypt.compare(password, candidate.password);
       if (areSame) {
          req.session.user = candidate;
@@ -29,6 +28,7 @@ router.post("/login", loginValidators, async (req, res) => {
          req.flash("loginStatus", "Неправильный пароль");
          res.redirect("login");
       }
+      res.json({ status: "done", message: "Успешный вход" });
    } catch (e) {
       console.log(e);
    }

@@ -54,6 +54,11 @@ app.use("/auth", authRoutes);
 app.use("/api", apiRoutes);
 app.use("/user", userRoutes);
 app.use("/admin", adminRoutes);
+app.get("/", (req, res) => {
+   res.render("mainPage", {
+      title: "Главная страница",
+   });
+});
 
 const start = () => {
    try {
