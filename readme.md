@@ -1,6 +1,6 @@
 # Backend side for a timetable app.
   * [All methods](#user-methods)
-    * [Users](#users)
+    * [User](#user)
       * [GET /profile](#user-profile)
       * [POST /edit](#user-edit)
       * [GET /timetable](#user-timetable)
@@ -20,3 +20,37 @@
       * [POST /creategroup](#admin-creategroup)
       * [POST /editgroup](#admin-editgroup)
   * [TODO](#todo)
+
+# All methods
+
+## User
+
+### User profile
+
+#### Description:<br>
+Method: GET.<br>
+User get's info about his profile.<br>
+### ACTION 
+```
+/user/profile
+```
+If user is unauthorized, he will get an error.<br>
+```json
+{
+ "status": "unauthorized",
+ "message: "Вы не авторизованы"
+}
+```
+#### Response example
+```json
+{
+ "_id": "61a35f2726c45e943a3dc6d9",
+ "email": "tester@mail.ru",
+ "password": "$2a$07$SnIEsrxrbXpAPgGTD76syO.IFJOlqCXzfuXM5CpxpvNJhSap5PitO",
+ "name": "Тестер",
+ "group": "61a3b30ebe8403874c1c3f6c",
+ "role": "ADMIN",
+ "__v": 0
+}
+```
+
