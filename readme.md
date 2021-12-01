@@ -180,7 +180,7 @@ User can leave his session via logging out.<br>
 ### Response example
 ```json
 {
- "status": "done:,
+ "status": "done",
  "message" "Успешный выход"
 }
 ```
@@ -209,19 +209,18 @@ username, password, name
 ```
 #### If errors 
 ```json
- [
+[
+ {
+  "msg": "Пользователь с таким username уже зарегистрирован",
+  "param": "username",
+  "location": "body"
+  },
   {
-   "msg": "Пользователь с таким username уже зарегистрирован",
-   "param": "username",
-   "location": "body"
-   },
-   {
-   "msg": "Пароль должен быть от 6 до 56 символов",
-   "param": "password",
-   "location": "body"
-  }
- ]
-}
+  "msg": "Пароль должен быть от 6 до 56 символов",
+  "param": "password",
+  "location": "body"
+ }
+[
 ```
 -----------------------------------------
 
