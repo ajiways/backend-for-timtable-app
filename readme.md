@@ -188,7 +188,7 @@ User can leave his session via logging out.<br>
 ```json
 {
  "status": "done",
- "message" "Успешный выход"
+ "message": "Успешный выход"
 }
 ```
 -----------------------------------------
