@@ -27,7 +27,6 @@ router.post("/login", loginValidators, async (req, res) => {
       } else {
          res.json({ status: "error", message: "Не правильный пароль" });
       }
-      res.json({ status: "done", message: "Успешный вход" });
    } catch (e) {
       console.log(e);
    }

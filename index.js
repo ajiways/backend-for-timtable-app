@@ -5,6 +5,7 @@ import flash from "connect-flash/lib/index.js";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import userMiddleware from "./middleware/user.js";
+import cors from "cors";
 import { fileURLToPath } from "url";
 import { MONGO_URI, SECRET_KEY, DB_OPTIONS } from "./config.js";
 import apiRoutes from "./routes/api.js";
@@ -33,6 +34,7 @@ app.use(
       store: store,
    })
 );
+app.use(cors());
 app.use(flash());
 
 app.use(userMiddleware);
