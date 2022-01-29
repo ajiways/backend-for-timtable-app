@@ -1,3 +1,5 @@
+Первая попытка реализовать хоть что-то, не судите строго :)
+
 # Backend side for a timetable app.
   * [All methods](#user-methods)
     * [User](#user)
